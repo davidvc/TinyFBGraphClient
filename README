@@ -1,0 +1,11 @@
+Please find here provided a very simple Java client for accessing
+the new Facebook "Open" Graph API.  Take a look at the samples
+in testsrc to see how it works, but it's pretty simple.
+
+I have included all the third-party jar files you need to run
+(except junit.jar). 
+
+I have also included the Eclipse project used to build it, so
+if you're an Eclipse user that should make your life easier.
+
+Questions, comments, please contact me at david dot vancouvering at gmail.com

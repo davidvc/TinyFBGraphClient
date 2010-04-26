@@ -5,13 +5,23 @@ import java.util.Map;
 
 import org.junit.Test;
 
-/**
- * A couple of example uses of TinyFBGraphClient.  You need to first get your
- * access code using OAuth.  See the Facebook developer pages on authentication
- * on how to do this for your environment
+/*
+ * Copyright 2010 David Van Couvering
+ *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this 
+ *  file except in compliance with the License. You may obtain a copy of the License 
+ *  at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law 
+ *  or agreed to in writing, software distributed under the License is distributed o
+ *  n an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express 
+ *  or implied. See the License for the specific language governing permissions and 
+ *  limitations under the License.  * A couple of example uses of TinyFBGraphClient.  
+ */
+
+/*
+ * To use these examples, you need to first get your access code using OAuth.  
+ * See the Facebook developer pages on authentication on how to do this for your environment
  * 
- * For processing JSON, I highly recommend the Svenson API at http://code.google.com/p/svenson/
- * 
+ * For processing the resulting JSON, I highly recommend the Svenson API at 
+ * http://code.google.com/p/svenson/
  */
 public class TinyFBClientExample {
 	private static final String ACCESS_TOKEN = "put your access token string here";

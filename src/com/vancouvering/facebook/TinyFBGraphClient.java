@@ -25,79 +25,39 @@
 
 package com.vancouvering.facebook;
 
-import java.net.URI;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.Map.Entry;
 
-import javax.ws.rs.core.UriBuilder;
-
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
+import com.vancouvering.net.URLInvoker;
 
 public class TinyFBGraphClient {
-	private Map<String, String> standardParms = new TreeMap<String, String>();
-	private ClientResponse restResponse;
-	private Client restClient;
-	private String facebookGraphServer = "http://graph.facebook.com";
+	private final Map<String, String> standardParms = new TreeMap<String, String>();
+	private final URLInvoker invoker;
+	static final String FACEBOOK_GRAPH_SERVER = "http://graph.facebook.com";
 
-	public TinyFBGraphClient() {
-		restClient = Client.create();
+	public TinyFBGraphClient(String accessToken) {
+		this(new URLInvoker(), accessToken);
 	}
-
-	public TinyFBGraphClient(String accessToken)
+	
+	TinyFBGraphClient(URLInvoker invoker, String accessToken)
 	{
-		this();
+		this.invoker = invoker;
 		standardParms.put("access_token", accessToken);
 	}
-	
-	public String call(String node) {
-		return call(node, Collections.<String, String>emptyMap());
+
+	public String callNode(String node) {
+		return callNode(node, Collections.<String, String>emptyMap());
 	}
 	
-	public String call(String node, Map<String, String> parms) {
-		ClientResponse thisResponse;
+	public String callNode(String node, Map<String, String> parms) {
+		String url = FACEBOOK_GRAPH_SERVER + "/" + node;
 
-		thisResponse = this.getResponse(node, parms);
-		return (thisResponse.getEntity(String.class));
-	}
-
-	public void setRequestParms(Map<String, String> parms) {
-		TreeMap<String, String> requestParms = new TreeMap<String, String>();
+		Map<String, String> requestParms = new HashMap<String, String>();
 		requestParms.putAll(standardParms);
 		requestParms.putAll(parms);
-	}
-
-	private ClientResponse getResponse(String node, Map<String, String> parms) {
-		TreeMap<String, String> restParms = new TreeMap<String, String>();
-		restParms.putAll(standardParms);
-		restParms.putAll(parms);
-
-		UriBuilder ub = UriBuilder.fromPath(facebookGraphServer + "/" + node);
-		buildURIParams(ub, restParms);
 		
-		WebResource resource = buildResource(ub);
-
-		restResponse = resource.get(ClientResponse.class);
-
-		return (restResponse);
+		return invoker.call(url, requestParms);
 	}
-
-	private WebResource buildResource(UriBuilder ub) {
-		WebResource resource;
-		URI uri;
-		uri = ub.build();
-		resource = restClient.resource(uri);
-		return resource;
-	}
-
-	private void buildURIParams(UriBuilder ub, Map<String, String> restParms) {
-		for (Entry<String, String> entry: restParms.entrySet()) {
-			ub.queryParam(entry.getKey(), entry.getValue());
-		}
-	}
-
-
 }

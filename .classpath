@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="lib/json-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/jsr311-api-1.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="/Users/David/code/TinyFBGraphClient/lib/mockito-all-1.8.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

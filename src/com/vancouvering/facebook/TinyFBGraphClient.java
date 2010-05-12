@@ -35,7 +35,7 @@ import com.vancouvering.net.URLInvoker;
 public class TinyFBGraphClient {
 	private final Map<String, String> standardParms = new TreeMap<String, String>();
 	private final URLInvoker invoker;
-	static final String FACEBOOK_GRAPH_SERVER = "http://graph.facebook.com";
+	static final String FACEBOOK_GRAPH_SERVER = "https://graph.facebook.com";
 
 	public TinyFBGraphClient(String accessToken) {
 		this(new URLInvoker(), accessToken);

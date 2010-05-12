@@ -31,7 +31,7 @@ public class TinyFBClientExample {
 	@Test
 	public void getMyFriendsExample()
 	{
-		String result = client.call("me/friends");
+		String result = client.callNode("me/friends");
 		System.out.println(result);
 	}
 	
@@ -40,7 +40,7 @@ public class TinyFBClientExample {
 	{
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("limit", "10");
-		String result = client.call("barackobama/feed", params);
+		String result = client.callNode("barackobama/feed", params);
 		
 		System.out.println(result);
 	}

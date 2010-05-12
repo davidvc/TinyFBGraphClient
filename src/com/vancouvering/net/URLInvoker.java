@@ -1,6 +1,5 @@
 package com.vancouvering.net;
 
-import java.util.Collections;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -25,17 +24,25 @@ public class URLInvoker {
 	
 	public String call(String URL, Map<String, String> parms)
 	{
-		ClientResponse response = this.getResponse(URL, parms);
+		ClientResponse response = getResponse(URL, parms);
 		return response.getEntity(String.class);
 	}
 	
 	public String call(String URL)
 	{
-		return call(URL, Collections.<String, String>emptyMap());
+		ClientResponse response = getResponse(URL);
+		return response.getEntity(String.class);
 	}
 	
-	private ClientResponse getResponse(String node, Map<String, String> parms) {
-		UriBuilder ub = UriBuilder.fromPath(node);
+	private ClientResponse getResponse(String URI)
+	{
+		UriBuilder ub = UriBuilder.fromUri(URI);
+		WebResource resource = buildResource(ub);
+		return resource.get(ClientResponse.class);
+	}
+	
+	private ClientResponse getResponse(String path, Map<String, String> parms) {
+		UriBuilder ub = UriBuilder.fromPath(path);
 		buildURIParams(ub, parms);
 		
 		WebResource resource = buildResource(ub);
